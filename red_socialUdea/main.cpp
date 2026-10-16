@@ -1,9 +1,32 @@
 #include <iostream>
+#include "arreglo_dinamico.h"
+
 using namespace std;
 
 int main() {
-    int opcion;
 
+    ArregloDinamico<int> prueba;
+    for (int i = 0; i < 10; i++)
+        prueba.agregar(i * 10);
+    cout << "Elementos: " << prueba.tamano() << endl;
+
+    cout << prueba[3] << endl;
+    prueba[3] = 99;
+    cout << prueba[3] << endl;
+    int opcion;
+    //  Iniciar sesion
+    string usuario, clave;
+    cout << "===== Iniciar sesion =====" << endl;
+    cout << "Usuario: ";
+    cin >> usuario;
+    cout << "Clave: ";
+    cin >> clave;
+
+    if (usuario != "angel" || clave != "1234") {
+        cout << "Usuario o clave incorrectos" << endl;
+        return 0;
+    }
+    cout << "Bienvenido, " << usuario << endl;
     do {
         cout << "\n***** Ude@Book *****" << endl;
         cout << "1. Administrar amistades" << endl;

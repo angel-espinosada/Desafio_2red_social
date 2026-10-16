@@ -9,5 +9,6 @@ SOURCES += \
         usuario.cpp
 
 HEADERS += \
+    arreglo_dinamico.h \
     udeabook.h \
     usuario.h
