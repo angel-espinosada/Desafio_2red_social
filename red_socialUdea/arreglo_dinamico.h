@@ -25,21 +25,43 @@ public:
         datos = new T[cap];
     }
 
+    //constructor copia
+    ArregloDinamico(const ArregloDinamico& otro) {
+        tam = otro.tam;
+        cap = otro.cap;
+        datos = new T[cap];              // pedir casas propias
+        for (int i = 0; i < tam; i++)
+            datos[i] = otro.datos[i];    // Accion de copiar
+    }
+
+    // Asignacion c = a
+    ArregloDinamico& operator=(const ArregloDinamico& otro) {
+        if (this != &otro) {
+            delete[] datos;
+            tam = otro.tam;
+            cap = otro.cap;
+            datos = new T[cap];
+            for (int i = 0; i < tam; i++)
+                datos[i] = otro.datos[i];
+        }
+        return *this;
+    }
 
     ~ArregloDinamico() {
         delete[] datos;
     }
     void agregar(const T& elemento) {
-        if (tam == cap)          // calle llena?
-            crecer();            // mudarse a una del doble
-        datos[tam] = elemento;   // ocupar la siguiente casa
-        tam++;                   // una casa ocupada mas
+        if (tam == cap)
+            crecer();
+        datos[tam] = elemento;
+        tam++;
     }
 
     // Cuantos elementos hay
-    int tamano() const {
+    int gettamano() const {
         return tam;
     }
+
     T& operator[](int i) {
         return datos[i];
     }

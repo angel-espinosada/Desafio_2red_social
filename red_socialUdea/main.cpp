@@ -5,14 +5,18 @@ using namespace std;
 
 int main() {
 
-    ArregloDinamico<int> prueba;
-    for (int i = 0; i < 10; i++)
-        prueba.agregar(i * 10);
-    cout << "Elementos: " << prueba.tamano() << endl;
+    ArregloDinamico<int> a;
+    a.agregar(5);
+    a.agregar(7);
 
-    cout << prueba[3] << endl;
-    prueba[3] = 99;
-    cout << prueba[3] << endl;
+    ArregloDinamico<int> c;
+    c.agregar(1);       // c ya tiene su propia calle
+    c = a;              // aqui se usa operator=
+    c[0] = 100;
+
+    cout << a[0] << endl;          // debe seguir en 5
+    cout << c[0] << endl;          // debe ser 100
+    cout << c.gettamano() << endl; // debe ser 2
     int opcion;
     //  Iniciar sesion
     string usuario, clave;
