@@ -10,13 +10,13 @@ int main() {
     a.agregar(7);
 
     ArregloDinamico<int> c;
-    c.agregar(1);       // c ya tiene su propia calle
-    c = a;              // aqui se usa operator=
+    c.agregar(1);
+    c = a;
     c[0] = 100;
 
-    cout << a[0] << endl;          // debe seguir en 5
-    cout << c[0] << endl;          // debe ser 100
-    cout << c.gettamano() << endl; // debe ser 2
+    cout << a[0] << endl;
+    cout << c[0] << endl;
+    cout << c.gettamano() << endl;
     int opcion;
     //  Iniciar sesion
     string usuario, clave;
