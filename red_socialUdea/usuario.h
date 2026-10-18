@@ -3,25 +3,30 @@
 #include <string>
 #include "arreglo_dinamico.h"
 
-using namespace std;
+using std::string;
 
 class usuario
 {
 private:
     string nombre_usuario;
     long long fecha_nacimiento;
-    string correo;
-    string ruta_foto;
-    string clave;
+    string _correo;
+    string _ruta_foto;
+    string _clave;
     string ciudad;
     string pais;
-    ArregloDinamico<string>album;
+    long long fecha_inscripcion;
+    ArregloDinamico<string>album;//
     ArregloDinamico<int>mensaje_enviado;
     ArregloDinamico<int>mensajes_recibidos;
-    ArregloDinamico<string>solicitudes_recibidas;
+    ArregloDinamico<int>solicitudes_recibidas;
     ArregloDinamico<int>amigos;
 public:
     usuario();
+    usuario(string nombre, int nacimiento, string correo, string clave,
+            string ciudad, string pais, int inscripcion);
+   string getnombre_usuario () const;
+    string getclave()const;
 };
 
 #endif // USUARIO_H

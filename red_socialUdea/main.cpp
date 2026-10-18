@@ -1,9 +1,25 @@
 #include <iostream>
 #include "arreglo_dinamico.h"
+#include "usuario.h"
 
 using namespace std;
 
 int main() {
+    ArregloDinamico<usuario> usuarios;
+
+    usuario u1("angel", 20000412, "annn@mail.com", "1234", "Medellin", "Colombia", 20250110);
+    usuario u2("maria", 19990101, "mar@mail.com", "abcd", "Bogota", "Colombia", 20250205);
+    usuario u3("pedro", 20010315, "pdr@mail.com", "pass", "Cali", "Colombia", 20250301);
+
+    usuarios.agregar(u1);
+    usuarios.agregar(u2);
+    usuarios.agregar(u3);
+
+    cout << "Hay " << usuarios.gettamano() << " usuarios" << endl;
+    cout << "El usuario 1 es: " << usuarios[0].getnombre_usuario() << endl;
+    usuario u("angel", 20000412, "anhg@mail.com", "1234", "Medellin", "Colombia", 20250110);
+    cout << u.getnombre_usuario() << endl;
+    cout << u.getclave() << endl;
 
     ArregloDinamico<int> a;
     a.agregar(5);
