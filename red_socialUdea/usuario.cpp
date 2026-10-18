@@ -23,3 +23,15 @@ string usuario::getclave() const
 {
     return _clave;
 }
+
+long long usuario::memoria_extra() const
+{
+    long long m = 0;
+    m += nombre_usuario.capacity() + _correo.capacity() + _ruta_foto.capacity();
+    m += _clave.capacity() + ciudad.capacity() + pais.capacity();
+    m += mensaje_enviado.getCapacidad() * sizeof(int);
+    m += mensajes_recibidos.getCapacidad() * sizeof(int);
+    m += solicitudes_recibidas.getCapacidad() * sizeof(int);
+    m += amigos.getCapacidad() * sizeof(int);
+    return m;
+}

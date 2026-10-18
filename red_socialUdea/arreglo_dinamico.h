@@ -61,7 +61,7 @@ public:
     int gettamano() const {
         return tam;
     }
-
+    int getCapacidad() const { return cap; }
     T& operator[](int i) {
         return datos[i];
     }

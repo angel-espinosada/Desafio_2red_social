@@ -25,8 +25,9 @@ public:
     usuario();
     usuario(string nombre, int nacimiento, string correo, string clave,
             string ciudad, string pais, int inscripcion);
-   string getnombre_usuario () const;
+    string getnombre_usuario () const;
     string getclave()const;
+    long long memoria_extra() const;
 };
 
 #endif // USUARIO_H

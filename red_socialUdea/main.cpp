@@ -2,7 +2,9 @@
 #include "arreglo_dinamico.h"
 #include "usuario.h"
 #include <fstream>
-
+#include <sstream>
+#include <string>
+#include "memoria.h"
 
 using namespace std;
 
@@ -15,44 +17,74 @@ bool cargarUsuarios(string nombrearchivo, ArregloDinamico<usuario>& usuarios) {
 
     string linea;
     while (getline(archivo, linea)) {
-        cout << "linea leida: " << linea << endl;
+
+        if (linea.empty()) continue;
+        memoria::contar();
+        stringstream ss(linea);
+        string nombre, nac, correo, clave, ciudad, pais, insc;
+        getline(ss, nombre, ';');
+        getline(ss, nac,    ';');
+        getline(ss, correo, ';');
+        getline(ss, clave,  ';');
+        getline(ss, ciudad, ';');
+        getline(ss, pais,   ';');
+        getline(ss, insc,   ';');
+        usuario u(nombre, stoi(nac), correo, clave, ciudad, pais, stoi(insc));
+        usuarios.agregar(u);
     }
     archivo.close();
     return true;
 }
 
-int main() {
-
-    ArregloDinamico<usuario> usuarios;
-    if (!cargarUsuarios("usuarios.txt", usuarios)) {
-        return 0;
-    }
-    ArregloDinamico<int> a;
-    a.agregar(5);
-    a.agregar(7);
-
-    ArregloDinamico<int> c;
-    c.agregar(1);
-    c = a;
-    c[0] = 100;
-
-    cout << a[0] << endl;
-    cout << c[0] << endl;
-    cout << c.gettamano() << endl;
-    int opcion;
-    //  Iniciar sesion
-    string usuario, clave;
+int login(ArregloDinamico<usuario>& usuarios) {
+    string nombre, clave;
     cout << "===== Iniciar sesion =====" << endl;
     cout << "Usuario: ";
-    cin >> usuario;
+    cin >> nombre;
     cout << "Clave: ";
     cin >> clave;
 
-    if (usuario != "angel" || clave != "1234") {
-        cout << "Usuario o clave incorrectos" << endl;
-        return 0;
+    for (int i = 0; i < usuarios.gettamano(); i++) {
+         memoria::contar();
+        if (usuarios[i].getnombre_usuario() == nombre && usuarios[i].getclave() == clave)
+            return i;
     }
-    cout << "Bienvenido, " << usuario << endl;
+    return -1;
+}
+
+//memeoria
+long long memoriaTotal(ArregloDinamico<usuario>& usuarios) {
+    long long m = sizeof(usuarios);
+    m += usuarios.getCapacidad() * sizeof(usuario);
+    for (int i = 0; i < usuarios.gettamano(); i++)
+        m += usuarios[i].memoria_extra();
+    return m;
+}
+int main() {
+
+    ArregloDinamico<usuario> usuarios;
+    if (!cargarUsuarios("usuarios.txt", usuarios))
+
+        return 0;
+        cout << "Usuarios cargados: " << usuarios.gettamano() << endl;
+        cout << "[Iteraciones carga: " << memoria::total() << "]" << endl;
+        memoria::reiniciar();
+
+        memoria::reiniciar();
+        int actual = login(usuarios);
+        if (actual == -1) {
+            cout << "Usuario o clave incorrectos" << endl;
+            return 0;
+    }
+
+
+
+
+
+    cout << "Bienvenido, " << usuarios[actual].getnombre_usuario() << endl;
+    cout << "[Iteraciones login: " << memoria::total() << "]" << endl;
+    cout << "[Memoria: " << memoriaTotal(usuarios) << " bytes]" << endl;
+     int opcion;
     do {
         cout << "\n***** Ude@Book *****" << endl;
         cout << "1. Administrar amistades" << endl;
