@@ -28,6 +28,10 @@ public:
     string getnombre_usuario () const;
     string getclave()const;
     long long memoria_extra() const;
+    void agregar_amigo(int indice);
+    ArregloDinamico<int>& getamigos();
+    void agregar_solicitud(int indice);
+    ArregloDinamico<int>& getsolicitudes();
 };
 
 #endif // USUARIO_H

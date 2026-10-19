@@ -35,3 +35,23 @@ long long usuario::memoria_extra() const
     m += amigos.getCapacidad() * sizeof(int);
     return m;
 }
+
+void usuario::agregar_amigo(int indice)
+{
+    amigos.agregar(indice);
+}
+
+ArregloDinamico<int> &usuario::getamigos()
+{
+    return amigos;
+}
+
+void usuario::agregar_solicitud(int indice)
+{
+    solicitudes_recibidas.agregar(indice);
+}
+
+ArregloDinamico<int> &usuario::getsolicitudes()
+{
+    return solicitudes_recibidas;
+}

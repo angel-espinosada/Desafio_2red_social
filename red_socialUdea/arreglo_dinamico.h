@@ -65,6 +65,12 @@ public:
     T& operator[](int i) {
         return datos[i];
     }
+    void eliminar(int i)
+    {
+        datos[i] = datos[tam - 1];
+        tam--;
+    }
+
 };
 
 
