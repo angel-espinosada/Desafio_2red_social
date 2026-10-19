@@ -33,6 +33,9 @@ long long usuario::memoria_extra() const
     m += mensajes_recibidos.getCapacidad() * sizeof(int);
     m += solicitudes_recibidas.getCapacidad() * sizeof(int);
     m += amigos.getCapacidad() * sizeof(int);
+    m += albumes.getCapacidad() * sizeof(album);
+    for (int i = 0; i < albumes.gettamano(); i++)
+        m += albumes[i].memoria_extra();
     return m;
 }
 
@@ -54,4 +57,28 @@ void usuario::agregar_solicitud(int indice)
 ArregloDinamico<int> &usuario::getsolicitudes()
 {
     return solicitudes_recibidas;
+}
+
+void usuario::agregar_enviado(int indice)
+{
+    mensaje_enviado.agregar(indice);
+}
+
+void usuario::agregar_recibido(int indice)
+{
+    mensajes_recibidos.agregar(indice);
+}
+
+ArregloDinamico<int> &usuario::getrecibidos()
+{
+    return mensajes_recibidos;
+}
+void usuario::agregar_album(const album& a)
+{
+    albumes.agregar(a);
+}
+
+ArregloDinamico<album> &usuario::getalbumes()
+{
+    return albumes;
 }

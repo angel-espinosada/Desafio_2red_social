@@ -7,6 +7,7 @@
 #include "memoria.h"
 #include <ctime>
 #include "udeabook.h"
+#include "mensaje.h"
 using namespace std;
 
 
@@ -40,11 +41,33 @@ void menu_amistades(udeabook& red)
     mostrar_metricas(red);
 }
 
+void menu_mensajes(udeabook& red)
+{
+    int op;
+    cout << "\n--- Mensajes ---" << endl;
+    cout << "1. Enviar mensaje" << endl;
+    cout << "2. Leer mensajes nuevos" << endl;
+    cout << "3. Buscar por fechas" << endl;
+    cout << "Opcion: ";
+    cin >> op;
+
+    memoria::reiniciar();
+    if (op == 1)
+        red.enviar_mensaje();
+    else if (op == 2)
+        red.leer_nuevos();
+    else if (op == 3)
+        red.buscar_mensajes();
+    else {
+        cout << "Opcion invalida" << endl;
+        return;
+    }
+    mostrar_metricas(red);
+}
 int main() {
 
     srand(time(0));
-    udeabook red;                          // toda la red social en un objeto
-
+    udeabook red;
     memoria::reiniciar();
     if (!red.cargar_datos()) {
         system("pause");
@@ -78,18 +101,29 @@ int main() {
         case 1: cout << "Amistades" << endl;
             menu_amistades(red);
             break;
-        case 2: cout << "Perfil" << endl; break;
+        case 2: cout << "Perfil" << endl;
+            memoria::reiniciar();
+            red.visitar_perfil();
+            mostrar_metricas(red);
+            break;
         case 3: {cout << "Sugerencias" << endl;
             memoria::reiniciar();
             red.ver_sugerencias();
             mostrar_metricas(red);
         }
             break;
-        case 4: cout << "Mensajes" << endl; break;
-        case 0: cout << "Hasta pronto" << endl; break;
+        case 4: cout << "Mensajes" << endl;
+            menu_mensajes(red);
+            break;
+        case 0: memoria::reiniciar();
+            red.guardar_datos();
+            mostrar_metricas(red);
+            cout << "Hasta pronto" << endl;
+            break;
         default: cout << "Opcion invalida" << endl;
         }
     } while (opcion != 0);
 
+    system("pause");
     return 0;
 }

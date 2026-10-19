@@ -2,6 +2,7 @@
 #define USUARIO_H
 #include <string>
 #include "arreglo_dinamico.h"
+#include "album.h"
 
 using std::string;
 
@@ -16,7 +17,7 @@ private:
     string ciudad;
     string pais;
     long long fecha_inscripcion;
-    ArregloDinamico<string>album;//
+    ArregloDinamico<album>albumes;//
     ArregloDinamico<int>mensaje_enviado;
     ArregloDinamico<int>mensajes_recibidos;
     ArregloDinamico<int>solicitudes_recibidas;
@@ -32,6 +33,11 @@ public:
     ArregloDinamico<int>& getamigos();
     void agregar_solicitud(int indice);
     ArregloDinamico<int>& getsolicitudes();
+    void agregar_enviado(int indice);
+    void agregar_recibido(int indice);
+    ArregloDinamico<int>& getrecibidos();
+    void agregar_album(const album& a);
+    ArregloDinamico<album>& getalbumes();
 };
 
 #endif // USUARIO_H

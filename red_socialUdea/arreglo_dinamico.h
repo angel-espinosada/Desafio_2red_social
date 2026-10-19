@@ -64,6 +64,10 @@ public:
     int getCapacidad() const { return cap; }
     T& operator[](int i) {
         return datos[i];
+
+    }
+    const T& operator[](int i) const {
+        return datos[i];
     }
     void eliminar(int i)
     {
